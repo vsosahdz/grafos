@@ -5,6 +5,7 @@ class ListaSimple{
     NodoT<T> * head;
     int tam;
     public:
+        NodoT<T> * getHead(){return this->head;}
         ListaSimple(){
             this->head=nullptr;
             this->tam=0;
