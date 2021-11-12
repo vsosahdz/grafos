@@ -8,7 +8,7 @@ class Arco{
         T getValorNodoDestino(){return this->ValorNodoDestino;}
         //Agregar metodos sets
         Arco(T valorNodoDestino,int peso){
-            this->valornodoDestino=valornodoDestino;
+            this->valorNodoDestino=valorNodoDestino;
             this->peso=peso;
         }
 };

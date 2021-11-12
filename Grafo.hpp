@@ -23,7 +23,7 @@ class Grafo{
         void insertarNodoGrafo(T valor){
             //Si el nodo no existe
             if(!this->buscarNodoGrafo(valor)){
-                this->nodos->agregarInicio(new NodoGrafo(valor));
+                this->nodos->agregarInicio(new NodoGrafo<T>(valor));
                 this->tam++;
             }else
                 cout<<"Nodo existente"<<endl;
