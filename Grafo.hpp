@@ -28,4 +28,31 @@ class Grafo{
             }else
                 cout<<"Nodo existente"<<endl;
         }
+
+        void agregarArco(T valorNodoOrigen, T valorNodoDestino, int peso){
+            //Validar la existencia de los nodos origen y destino
+            NodoGrafo<T> * origen=this->buscarNodoGrafo(valorNodoOrigen);
+            NodoGrafo<T> * destino=this->buscarNodoGrafo(valorNodoDestino);
+            if(origen&&destino)
+                origen->getArcos()->agregarInicio(new Arco<T>(valorNodoDestino,peso));
+            else
+                cout<<"Ambos nodos tanto origen como destino deben existir"<<endl;
+        }
+
+        void imprimirGrafo(){
+            NodoT<NodoGrafo<T>*> * nodo=this->nodos->getHead();
+            //Recorrer la lista de nodos
+            while(nodo){
+                cout<<"Nodo:"<< nodo->getDato()->getValor()<<" \n";
+                NodoT<Arco<T>*> * arco = nodo->getDato()->getArcos()->getHead();
+                //Recorrer la lista de arcos de cada nodo
+                while(arco){
+                    cout<<"->"<<arco->getDato()->getValorNodoDestino()<<":"<<arco->getDato()->getPeso()<<" ";
+                    arco=arco->getSiguiente();
+                }
+                cout<<endl;
+                nodo=nodo->getSiguiente();                
+            }
+            cout<<endl;
+        }
 };
