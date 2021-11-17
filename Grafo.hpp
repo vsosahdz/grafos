@@ -1,4 +1,5 @@
 #include "NodoGrafo.hpp"
+#include "Fila.hpp"
 
 template <typename T>
 class Grafo{
@@ -54,5 +55,41 @@ class Grafo{
                 nodo=nodo->getSiguiente();                
             }
             cout<<endl;
+        }
+
+        void BreadthFirst(NodoGrafo<T> * nodoG){
+            //Crear la fila de control
+            Fila<NodoGrafo<T> *> * fila = new Fila<NodoGrafo<T> *>();
+            //Inicializar procesado de cada NodoGrafo
+            NodoT<NodoGrafo<T>*> * actual=this->nodos->getHead();
+            if(actual){
+                while(actual){
+                    actual->getDato()->setProcesado(false);
+                    actual=actual->getSiguiente();
+                }
+                //Metemos el NodoGrafo por el que inicia el recorrido
+                nodoG->setProcesado(true);
+                fila->push(nodoG);
+                while(fila->front()){
+                    NodoGrafo<T> * aux = fila->pop()->getDato();
+                    //Imprimo el valor del nodoGrafo
+                    cout<< aux->getValor()<<" ";
+                    //Checar las conexiones sin procesar
+                    NodoT<Arco<T>*> * con=aux->getArcos()->getHead();
+                    while(con){
+                        NodoGrafo<T> * vecino = this->buscarNodoGrafo(con->getDato()->getValorNodoDestino());
+                        if(!vecino->getProcesado()){
+                            vecino->setProcesado(true);
+                            //Meter a la fila
+                            fila->push(vecino);
+                        }
+                        con=con->getSiguiente();
+                    }
+                }
+                cout<<endl;
+
+            }else{
+                cout<<"Grafo vacio"<<endl;
+            }
         }
 };
